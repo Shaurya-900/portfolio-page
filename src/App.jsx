@@ -11,7 +11,9 @@ import {
 
 const PROFILE = {
   name: "Shaurya Jain",
-  identity: "Second-year CSE student — I design and ship web apps.",
+  identity: "I design, build, and ship full-stack web apps.",
+  about:
+    "Second-year CSE student at Shiv Nadar University. I build web apps end to end, from the API to the interface, and I'm available for freelance landing pages and tools.",
   email: "shauryajm2818@gmail.com",
   github: "https://github.com/Shaurya-900",
 };
@@ -25,6 +27,7 @@ const PROJECTS = [
     solution:
       "Upload an audio file and get back a clean, readable transcript in seconds.",
     stack: ["Flask", "Groq Whisper", "Python"],
+    outcome: "Live and handling real audio uploads.",
     demo: "https://audio-transcriber-sa9l.onrender.com/transcribe",
     image: "/audio-transcriber.png",
   },
@@ -32,10 +35,11 @@ const PROJECTS = [
     index: "02",
     title: "Campus Lost & Found",
     problem:
-      "Lost items on campus rarely reach their owners — posts get buried and descriptions never match.",
+      "Lost items on campus rarely reach their owners, posts get buried and descriptions never match.",
     solution:
       "Photos of lost and found items are matched automatically with vision AI, so claims surface without manual searching.",
     stack: ["React", "Node", "Gemini Vision"],
+    outcome: "Deployed with working vision-AI matching.",
     demo: "https://campus-lost-found-serverless.vercel.app",
     image: "/campus-lost-found.png",
   },
@@ -152,28 +156,41 @@ function Reveal({ children, delay = 0, className = "" }) {
   );
 }
 
-/* Screenshot frame — shows the real image, falls back to a placeholder
-   until the file exists in /public. */
+/* Screenshot wrapped in a minimal browser-chrome mockup — dark top bar,
+   three window dots, subtle border — so embeds read as product shots.
+   Falls back to a placeholder until the file exists in /public. */
 function Screenshot({ src, alt }) {
   const [ok, setOk] = useState(Boolean(src));
   return (
-    <div className="mt-6 aspect-[16/9] w-full overflow-hidden rounded-md border border-zinc-800 bg-zinc-900/40">
-      {ok ? (
-        <img
-          src={src}
-          alt={alt}
-          loading="lazy"
-          onError={() => setOk(false)}
-          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
-        />
-      ) : (
-        <div className="flex h-full w-full items-center justify-center border border-dashed border-zinc-800 transition-transform duration-500 group-hover:scale-[1.03]">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-zinc-700">
-            screenshot
-          </span>
+    <figure className="mt-6 overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900/60 shadow-xl shadow-black/40">
+      {/* browser top bar */}
+      <div className="flex items-center gap-3 border-b border-zinc-800 bg-zinc-950/80 px-4 py-2.5">
+        <div className="flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-zinc-700" />
+          <span className="h-2.5 w-2.5 rounded-full bg-zinc-700" />
+          <span className="h-2.5 w-2.5 rounded-full bg-zinc-700" />
         </div>
-      )}
-    </div>
+        <span className="h-4 flex-1 rounded bg-zinc-800/60" aria-hidden="true" />
+      </div>
+      {/* viewport */}
+      <div className="aspect-[16/9] w-full overflow-hidden bg-zinc-900/40">
+        {ok ? (
+          <img
+            src={src}
+            alt={alt}
+            loading="lazy"
+            onError={() => setOk(false)}
+            className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center border border-dashed border-zinc-800 transition-transform duration-500 group-hover:scale-[1.03]">
+            <span className="font-mono text-xs uppercase tracking-[0.25em] text-zinc-700">
+              screenshot
+            </span>
+          </div>
+        )}
+      </div>
+    </figure>
   );
 }
 
@@ -286,6 +303,16 @@ function ProjectCard({ project, delay }) {
             <span className="text-zinc-200">{project.solution}</span>
           </p>
 
+          {project.outcome && (
+            <p className="mt-3 flex items-center gap-2 font-mono text-xs text-zinc-500">
+              <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+              </span>
+              {project.outcome}
+            </p>
+          )}
+
           <Screenshot src={project.image} alt={`${project.title} screenshot`} />
 
           <ul className="mt-6 flex flex-wrap gap-2">
@@ -392,6 +419,13 @@ export default function App() {
             }`}
           >
             {typed}
+          </motion.p>
+
+          <motion.p
+            variants={item}
+            className="mt-5 max-w-md leading-relaxed text-zinc-500"
+          >
+            {PROFILE.about}
           </motion.p>
 
           <motion.nav
