@@ -36,7 +36,7 @@ const PROJECTS = [
     solution:
       "Photos of lost and found items are matched automatically with vision AI, so claims surface without manual searching.",
     stack: ["React", "Node", "Gemini Vision"],
-    demo: "https://campus-lost-found-serverless-4zq277m5r.vercel.app/",
+    demo: "https://campus-lost-found-serverless.vercel.app",
     image: "/campus-lost-found.png",
   },
 ];
