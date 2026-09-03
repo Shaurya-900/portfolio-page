@@ -15,10 +15,11 @@ export default function WireTicker() {
     let cancelled = false;
     fetchEvents(PAPER.githubUser).then((events) => {
       if (cancelled || !events) return;
-      const live = events
-        .map(eventBrief)
-        .filter((b): b is string => Boolean(b))
-        .slice(0, 10);
+      // The feed repeats itself on a busy day; the wire only runs a brief once.
+      const live = [...new Set(events.map(eventBrief).filter((b): b is string => Boolean(b)))].slice(
+        0,
+        10
+      );
       if (live.length > 0) setBriefs(live);
     });
     return () => {

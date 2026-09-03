@@ -25,22 +25,21 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "The Daily Build — Shaurya Jain, full-stack developer",
+  title: "Shaurya Jain — full-stack developer",
   description:
-    "The collected works of Shaurya Jain, printed as a broadsheet: a self-writing news aggregator, an audio transcriber, a computer-vision lost & found, and live market data from GitHub.",
+    "The work of Shaurya Jain, printed as a broadsheet: a self-writing news aggregator, a club-fair game, an audio transcriber and a computer-vision lost & found. All deployed and running.",
   keywords: [
     "Shaurya Jain",
     "full-stack developer",
     "portfolio",
-    "news aggregator",
     "Next.js",
     "Shiv Nadar University",
   ],
   authors: [{ name: PAPER.publisher, url: PAPER.github }],
   openGraph: {
-    title: "The Daily Build — all the code that's fit to ship",
+    title: "Shaurya Jain — all the code that's fit to ship",
     description:
-      "Shaurya Jain's portfolio, typeset as a newspaper. Lead story: the news aggregator that writes itself.",
+      "Four shipped web applications, typeset as a newspaper.",
     type: "website",
   },
 };

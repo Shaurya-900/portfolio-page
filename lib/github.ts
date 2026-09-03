@@ -64,11 +64,11 @@ export function eventBrief(e: GhEvent): string | null {
   const when = timeAgo(e.created_at).toUpperCase();
   switch (e.type) {
     case "PushEvent": {
-      const n = e.payload.commits?.length ?? 0;
-      const msg = e.payload.commits?.[e.payload.commits.length - 1]?.message
-        ?.split("\n")[0]
-        ?.slice(0, 72);
-      return `${when} · PUSH · ${repo} — ${n} commit${n === 1 ? "" : "s"}${msg ? ` — “${msg}”` : ""}`;
+      // The public events feed often omits the commit list; fall back to the branch.
+      const msg = e.payload.commits?.at(-1)?.message.split("\n")[0].slice(0, 72);
+      const branch = e.payload.ref?.replace("refs/heads/", "");
+      const detail = msg ? `“${msg}”` : branch;
+      return `${when} · PUSH · ${repo}${detail ? ` — ${detail}` : ""}`;
     }
     case "CreateEvent":
       return `${when} · NEW ${e.payload.ref_type?.toUpperCase() ?? "REF"} · ${repo}${e.payload.ref ? ` — ${e.payload.ref}` : ""}`;
