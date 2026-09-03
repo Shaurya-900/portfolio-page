@@ -133,6 +133,18 @@ a:focus-visible .proof,
   text-justify: inter-word;
 }
 
+/* One continuous rule down the middle of a two-column spread. A border on
+   each card would break at every row and sit off-centre in the gutter; this
+   is a single line, painted the full height of the section. */
+@media (min-width: 768px) {
+  .gutter-rule {
+    background-image: linear-gradient(rgb(var(--rule) / 0.6), rgb(var(--rule) / 0.6));
+    background-size: 1px 100%;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+  }
+}
+
 /* Ticker track animation. */
 @keyframes ticker {
   from {

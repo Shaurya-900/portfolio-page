@@ -30,7 +30,7 @@ export default function Masthead({ now }: { now: Date }) {
         <p className="dept text-center text-soft">
           {PAPER.name} · {PAPER.motto}
         </p>
-        <FitLine text="SHAURYA JAIN" className="mt-3 text-ink" />
+        <FitLine text="SHAURYA JAIN" height={106} fontSize={124} className="mt-3 text-ink" />
         <p className="mx-auto mt-5 max-w-2xl text-center font-serif text-[17px] italic leading-relaxed text-soft sm:text-xl">
           {DECK}
         </p>

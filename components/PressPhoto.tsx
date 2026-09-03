@@ -29,7 +29,7 @@ export default function PressPhoto({
     </div>
   );
   return (
-    <figure className="mt-5 border border-ink/60 p-1.5">
+    <figure className="border border-ink/60">
       {reduce ? (
         img
       ) : (
@@ -42,7 +42,7 @@ export default function PressPhoto({
           {img}
         </motion.div>
       )}
-      <figcaption className="dept px-1 pb-0.5 pt-2 text-soft">{caption}</figcaption>
+      <figcaption className="dept border-t border-ink/60 px-2.5 py-2 text-soft">{caption}</figcaption>
     </figure>
   );
 }

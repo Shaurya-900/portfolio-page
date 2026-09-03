@@ -12,7 +12,7 @@ page, and dark mode is the Late Edition.
 - **Next.js (App Router) + TypeScript** — server components everywhere except the live GitHub desks
 - **Tailwind CSS** — design tokens as CSS variables (`--paper`, `--ink`, `--accent`) so the Late Edition is a palette swap
 - **Framer Motion** — section reveals, drawn rules, developing press photographs; everything honors `prefers-reduced-motion`
-- **Typography** — Fraunces (display), Newsreader (text), IBM Plex Mono (figures), via `next/font`
+- **Typography** — Playfair Display (display), Newsreader (text), IBM Plex Mono (figures), via `next/font`
 
 ## Develop
 

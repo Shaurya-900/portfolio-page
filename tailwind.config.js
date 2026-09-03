@@ -12,7 +12,7 @@ module.exports = {
         accent: "rgb(var(--accent) / <alpha-value>)",
       },
       fontFamily: {
-        display: ["var(--font-display)", "Iowan Old Style", "Georgia", "serif"],
+        display: ["var(--font-display)", "Playfair Display", "Georgia", "serif"],
         serif: ["var(--font-serif)", "Iowan Old Style", "Georgia", "serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },

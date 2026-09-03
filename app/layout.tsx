@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Fraunces, Newsreader, IBM_Plex_Mono } from "next/font/google";
+import { Playfair_Display, Newsreader, IBM_Plex_Mono } from "next/font/google";
 import { PAPER } from "@/lib/content";
 import "./globals.css";
 
-const display = Fraunces({
+/* Playfair over Fraunces: Fraunces' capital J curls back under the baseline,
+   which reads as a squiggle in a nameplate. Playfair's sits on it. */
+const display = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-display",
-  axes: ["opsz"],
   weight: "variable",
   style: ["normal", "italic"],
 });

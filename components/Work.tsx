@@ -10,14 +10,10 @@ export default function Work() {
     <section aria-label="The work">
       <SectionHead id="work" title="The Work" note="Four shipped · every one deployed and running" />
 
-      <div className="grid gap-x-10 gap-y-14 pt-10 md:grid-cols-2">
+      <div className="gutter-rule grid gap-x-14 gap-y-16 pt-10 md:grid-cols-2">
         {PROJECTS.map((p, i) => (
-          <Reveal
-            key={p.slug}
-            delay={(i % 2) * 0.08}
-            className={i % 2 === 0 ? "md:border-r md:border-rule/60 md:pr-10" : undefined}
-          >
-            <article aria-labelledby={`work-${p.slug}`}>
+          <Reveal key={p.slug} delay={(i % 2) * 0.08} className="flex">
+            <article aria-labelledby={`work-${p.slug}`} className="flex w-full flex-col">
               <PressPhoto
                 src={p.photo.src}
                 alt={`${p.headline} — press photograph`}
@@ -31,9 +27,9 @@ export default function Work() {
                 text={p.headline}
                 className="mt-1.5 font-display text-[28px] font-black leading-[1.04] tracking-tight sm:text-[34px]"
               />
-              <p className="copy mt-3 font-serif text-[15.5px] leading-[1.7]">{p.blurb}</p>
+              <p className="copy mb-6 mt-3 font-serif text-[15.5px] leading-[1.7]">{p.blurb}</p>
 
-              <div className="dept mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-rule/60 pt-3 text-soft">
+              <div className="dept mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-rule/60 pt-3 text-soft">
                 <span>{p.stack.join(" · ")}</span>
                 <span className="ml-auto flex flex-wrap items-center gap-x-4 gap-y-1">
                   {p.live && (
