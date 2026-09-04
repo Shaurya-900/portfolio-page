@@ -26,7 +26,14 @@ const mono = IBM_Plex_Mono({
   weight: ["400", "500"],
 });
 
+/* Absolute base for the share card and canonical URL. Vercel supplies the
+   production host at build; locally it is just the dev server. */
+const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Shaurya Jain: full-stack developer",
   description:
     "The work of Shaurya Jain, printed as a broadsheet: a self-writing news aggregator, a club-fair game, an audio transcriber and a computer-vision lost & found. All deployed and running.",
@@ -43,6 +50,11 @@ export const metadata: Metadata = {
     description:
       "Four shipped web applications, typeset as a newspaper.",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shaurya Jain: all the code that's fit to ship",
+    description: "Four shipped web applications, typeset as a newspaper.",
   },
 };
 
@@ -68,6 +80,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
+        {/* The entrance animations start hidden and are released by an
+            observer. With no JavaScript there is no observer, so the paper
+            prints flat rather than blank. */}
+        <noscript>
+          <style>{`.reveal,.rule-draw,.develop,.set-word{opacity:1!important;transform:none!important;filter:none!important}`}</style>
+        </noscript>
       </head>
       <body
         className={`${display.variable} ${serif.variable} ${mono.variable} grain font-serif`}

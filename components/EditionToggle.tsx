@@ -29,11 +29,14 @@ export default function EditionToggle() {
       type="button"
       onClick={toggle}
       aria-pressed={late === true}
-      className="dept border border-ink/40 px-2.5 py-1.5 transition-colors hover:border-accent hover:text-accent"
-      title={late ? "Switch to the Morning Edition" : "Switch to the Late Edition"}
+      className="dept edition-toggle border border-ink/40 px-2.5 py-1.5 transition-colors hover:border-accent hover:text-accent"
+      title="Switch edition"
     >
-      {/* Render both labels until mounted state is known to avoid hydration drift */}
-      {late === null ? "Late Edition" : late ? "Morning Edition" : "Late Edition"}
+      {/* CSS picks the label off the <html> class, which the inline script
+          sets before first paint, so the button never prints the wrong
+          edition while it waits to hydrate. */}
+      <span className="dark:hidden">Late Edition</span>
+      <span className="hidden dark:inline">Morning Edition</span>
     </button>
   );
 }

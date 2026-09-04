@@ -2,9 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Reveal from "./Reveal";
+import Sparkline from "./Sparkline";
 import SectionHead from "./SectionHead";
 import { PAPER } from "@/lib/content";
-import { fetchRepos, timeAgo, type Repo } from "@/lib/github";
+import { commitsByDay, fetchEvents, fetchRepos, timeAgo, type Repo } from "@/lib/github";
 
 type Quotes =
   | { state: "loading" }
@@ -18,12 +19,19 @@ type Quotes =
  */
 export default function Markets() {
   const [quotes, setQuotes] = useState<Quotes>({ state: "loading" });
+  const [volume, setVolume] = useState<number[] | null>(null);
 
   useEffect(() => {
     let cancelled = false;
     fetchRepos(PAPER.githubUser).then((repos) => {
       if (cancelled) return;
       setQuotes(repos ? { state: "live", repos } : { state: "delayed" });
+    });
+    // Shares the wire's single request for the events feed.
+    fetchEvents(PAPER.githubUser).then((all) => {
+      if (cancelled || !all) return;
+      const days = commitsByDay(all);
+      if (days.some((n) => n > 0)) setVolume(days);
     });
     return () => {
       cancelled = true;
@@ -116,7 +124,11 @@ export default function Markets() {
           </Reveal>
 
           <Reveal delay={0.06} className="lg:col-span-4">
-            <h3 className="dept border-b border-ink/60 pb-2">Holdings · by language</h3>
+            {volume && <Sparkline days={volume} />}
+
+            <h3 className={`dept border-b border-ink/60 pb-2 ${volume ? "mt-8" : ""}`}>
+              Holdings · by language
+            </h3>
             <ul className="mt-3 space-y-2.5">
               {holdings.map((h) => (
                 <li key={h.lang} className="font-mono text-[12.5px]">

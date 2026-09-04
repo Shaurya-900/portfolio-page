@@ -1,5 +1,7 @@
 "use client";
 
+import { Fragment } from "react";
+
 import useInView from "./useInView";
 
 /**
@@ -23,16 +25,19 @@ export default function Headline({
   return (
     <Tag ref={ref} id={id} className={`${className ?? ""} ${cls}`} aria-label={text}>
       {words.map((w, i) => (
-        <span
-          key={i}
-          aria-hidden="true"
-          className="inline-block overflow-hidden pb-[0.08em] align-top"
-        >
-          <span className="set-word" style={{ animationDelay: `${i * 0.045}s` }}>
-            {w}
+        <Fragment key={i}>
+          <span
+            aria-hidden="true"
+            className="inline-block overflow-hidden pb-[0.08em] align-top"
+          >
+            <span className="set-word" style={{ animationDelay: `${i * 0.045}s` }}>
+              {w}
+            </span>
           </span>
+          {/* The space lives between the clipped words, never inside one:
+              a trailing space in an inline-block is collapsed away. */}
           {i < words.length - 1 ? " " : ""}
-        </span>
+        </Fragment>
       ))}
     </Tag>
   );

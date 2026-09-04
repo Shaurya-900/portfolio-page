@@ -27,7 +27,11 @@ export default function WireTicker() {
     };
   }, []);
 
-  const row = [...briefs, ...briefs];
+  // The loop scrolls one copy's width and restarts, so a copy narrower than
+  // the screen leaves a bald patch. Three fallback briefs do not fill a
+  // desktop; repeat them until they do, then duplicate for the seam.
+  const strip = Array.from({ length: Math.ceil(9 / Math.max(1, briefs.length)) }, () => briefs).flat();
+  const row = [...strip, ...strip];
 
   return (
     <div

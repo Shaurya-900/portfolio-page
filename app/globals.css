@@ -259,3 +259,80 @@ a:focus-visible .proof,
     animation: none !important;
   }
 }
+
+/* ------------------------------------------------------------------ */
+/* The printed edition. A newspaper should survive a printer: flatten  */
+/* the entrance animations, drop the grain and the moving wire, put    */
+/* the work into columns and print every link's address after it.      */
+/* ------------------------------------------------------------------ */
+@media print {
+  @page {
+    margin: 14mm;
+  }
+
+  :root,
+  .late {
+    --paper: 255 255 255;
+    --ink: 0 0 0;
+    --soft: 68 68 68;
+    --rule: 136 136 136;
+    --accent: 0 0 0;
+  }
+
+  html,
+  body {
+    background: #fff;
+  }
+
+  /* Nothing here has meaning on paper. */
+  .grain::before,
+  .ticker-track,
+  [aria-label="Recent activity wire"],
+  nav,
+  .edition-toggle,
+  footer a {
+    display: none !important;
+  }
+
+  /* Animations are a screen idea; on paper everything has already arrived. */
+  .reveal,
+  .rule-draw,
+  .develop,
+  .set-word {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+  }
+
+  /* Photographs print as halftones badly; keep them, drop the screen. */
+  .press-photo::after {
+    display: none;
+  }
+  .press-photo img {
+    filter: grayscale(1) contrast(1.1);
+  }
+
+  /* Two columns of work, and no article split across a fold. */
+  article,
+  figure,
+  li {
+    break-inside: avoid;
+  }
+  section {
+    break-inside: auto;
+  }
+
+  /* Print the address of every link, the way a paper prints a citation. */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-family: var(--font-mono);
+    font-size: 0.7em;
+    color: rgb(var(--soft));
+    word-break: break-all;
+  }
+  a[href^="mailto:"]::after,
+  td a[href^="http"]::after {
+    content: "";
+  }
+}
