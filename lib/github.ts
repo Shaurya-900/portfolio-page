@@ -68,10 +68,10 @@ export function eventBrief(e: GhEvent): string | null {
       const msg = e.payload.commits?.at(-1)?.message.split("\n")[0].slice(0, 72);
       const branch = e.payload.ref?.replace("refs/heads/", "");
       const detail = msg ? `“${msg}”` : branch;
-      return `${when} · PUSH · ${repo}${detail ? ` — ${detail}` : ""}`;
+      return `${when} · PUSH · ${repo}${detail ? ` · ${detail}` : ""}`;
     }
     case "CreateEvent":
-      return `${when} · NEW ${e.payload.ref_type?.toUpperCase() ?? "REF"} · ${repo}${e.payload.ref ? ` — ${e.payload.ref}` : ""}`;
+      return `${when} · NEW ${e.payload.ref_type?.toUpperCase() ?? "REF"} · ${repo}${e.payload.ref ? ` · ${e.payload.ref}` : ""}`;
     case "PullRequestEvent":
       return `${when} · PULL REQUEST ${e.payload.action?.toUpperCase() ?? ""} · ${repo}`;
     case "IssuesEvent":

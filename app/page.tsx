@@ -20,13 +20,13 @@ export default function FrontPage() {
         Skip to the work
       </a>
 
-      <div id="top" className="mx-auto w-full max-w-6xl px-4 pt-4 sm:px-8 sm:pt-6">
+      <div id="top" className="w-full px-4 pt-4 sm:px-6 sm:pt-6">
         <Masthead now={now} />
       </div>
 
       <WireTicker />
 
-      <main className="mx-auto w-full max-w-6xl px-4 sm:px-8">
+      <main className="w-full px-4 sm:px-6">
         <Work />
         <Markets />
         <Contact />

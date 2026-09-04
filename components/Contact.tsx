@@ -12,7 +12,7 @@ export default function Contact() {
         <Reveal className="lg:col-span-5">
           <p className="dept text-accent">From the Editor</p>
           <p className="copy dropcap mt-4 font-serif text-[16px] leading-[1.75]">{EDITOR_NOTE}</p>
-          <p className="mt-4 font-display text-xl font-semibold italic">— Shaurya</p>
+          <p className="mt-4 font-serif text-xl italic">Shaurya</p>
         </Reveal>
 
         <Reveal delay={0.08} className="lg:col-span-7">

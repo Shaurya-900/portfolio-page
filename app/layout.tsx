@@ -9,24 +9,25 @@ const display = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-display",
   weight: "variable",
-  style: ["normal", "italic"],
 });
 
+/* Only the weights the paper actually sets. Every extra weight and style
+   is another font file on the wire for type nobody sees. */
 const serif = Newsreader({
   subsets: ["latin"],
   variable: "--font-serif",
-  weight: ["400", "500", "600"],
+  weight: ["400"],
   style: ["normal", "italic"],
 });
 
 const mono = IBM_Plex_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: "Shaurya Jain — full-stack developer",
+  title: "Shaurya Jain: full-stack developer",
   description:
     "The work of Shaurya Jain, printed as a broadsheet: a self-writing news aggregator, a club-fair game, an audio transcriber and a computer-vision lost & found. All deployed and running.",
   keywords: [
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: PAPER.publisher, url: PAPER.github }],
   openGraph: {
-    title: "Shaurya Jain — all the code that's fit to ship",
+    title: "Shaurya Jain: all the code that's fit to ship",
     description:
       "Four shipped web applications, typeset as a newspaper.",
     type: "website",

@@ -104,7 +104,7 @@ export default function Markets() {
                       </a>
                     </td>
                     <td className="border-b border-rule/40 py-2.5 pr-4 text-soft">
-                      {r.language ?? "—"}
+                      {r.language ?? "·"}
                     </td>
                     <td className="border-b border-rule/40 py-2.5 text-right text-soft">
                       {timeAgo(r.pushed_at)}

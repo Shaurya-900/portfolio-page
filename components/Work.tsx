@@ -16,7 +16,7 @@ export default function Work() {
             <article aria-labelledby={`work-${p.slug}`} className="flex w-full flex-col">
               <PressPhoto
                 src={p.photo.src}
-                alt={`${p.headline} — press photograph`}
+                alt={`${p.headline}, press photograph`}
                 caption={p.photo.caption}
               />
 

@@ -171,3 +171,91 @@ a:focus-visible .proof,
   outline: 2px solid rgb(var(--accent));
   outline-offset: 3px;
 }
+
+/* ------------------------------------------------------------------ */
+/* Entrance animations. Each element starts in its "before" state and  */
+/* gets .in from an IntersectionObserver (see useInView), which runs   */
+/* the keyframes once. CSS does the work so no animation library ships */
+/* to the browser for four fades.                                      */
+/* ------------------------------------------------------------------ */
+.reveal {
+  opacity: 0;
+}
+.reveal.in {
+  animation: reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* A rule that inks itself across the page. */
+.rule-draw {
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.in > .rule-draw {
+  animation: rule-draw 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes rule-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* A press photo arriving over-exposed, then settling into the page. */
+.develop {
+  opacity: 0.4;
+}
+.develop.in {
+  animation: develop 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes develop {
+  from {
+    opacity: 0.4;
+    filter: blur(10px) brightness(1.6) contrast(0.7);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+  }
+}
+
+/* Headline words rising out of the baseline, as if set in a composing stick. */
+.set-word {
+  display: inline-block;
+  transform: translateY(110%);
+}
+.in .set-word {
+  animation: set-word 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes set-word {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .rule-draw,
+  .develop,
+  .set-word {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    animation: none !important;
+  }
+}

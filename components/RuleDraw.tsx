@@ -1,21 +1,17 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import useInView from "./useInView";
 
-/** A double rule that inks itself across the page as it enters view. */
+/**
+ * A double rule that inks itself across the page as it enters view.
+ * The observer watches the wrapper, not the rule: the rule starts at
+ * scaleX(0), and a zero-width box never reports as intersecting.
+ */
 export default function RuleDraw({ flipped = false }: { flipped?: boolean }) {
-  const reduce = useReducedMotion();
-  const cls = flipped ? "double-rule-flip" : "double-rule";
-  if (reduce) return <div className={cls} aria-hidden="true" />;
+  const { ref, cls } = useInView<HTMLDivElement>("-40px");
   return (
-    <motion.div
-      aria-hidden="true"
-      className={cls}
-      style={{ transformOrigin: "left center" }}
-      initial={{ scaleX: 0 }}
-      whileInView={{ scaleX: 1 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-    />
+    <div ref={ref} className={cls} aria-hidden="true">
+      <div className={`${flipped ? "double-rule-flip" : "double-rule"} rule-draw`} />
+    </div>
   );
 }

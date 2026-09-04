@@ -37,7 +37,7 @@ export default function Masthead({ now }: { now: Date }) {
       </Reveal>
 
       <Reveal delay={0.12} className="mt-8">
-        <div className="double-rule" aria-hidden="true" />
+        <div className="double-rule -mx-4 sm:-mx-6" aria-hidden="true" />
         <nav aria-label="Sections">
           <ul className="dept flex flex-wrap items-center justify-center gap-x-7 gap-y-1 py-2.5">
             {INDEX.map((item) => (
@@ -67,7 +67,7 @@ export default function Masthead({ now }: { now: Date }) {
             </li>
           </ul>
         </nav>
-        <div className="double-rule-flip" aria-hidden="true" />
+        <div className="double-rule-flip -mx-4 sm:-mx-6" aria-hidden="true" />
       </Reveal>
     </header>
   );
