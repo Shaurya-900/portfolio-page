@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/* Edition palettes. Morning: ink on warm newsprint. Late: the same    */
+/* paper after dark — deep warm black, cream type, embered vermilion.  */
+/* ------------------------------------------------------------------ */
+:root {
+  --paper: 244 239 228;
+  --ink: 26 22 16;
+  --soft: 94 86 74;
+  --rule: 176 166 146;
+  --accent: 158 42 26;
+}
+
+.late {
+  --paper: 22 20 17;
+  --ink: 233 226 210;
+  --soft: 158 149 132;
+  --rule: 76 70 60;
+  --accent: 209 91 64;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: rgb(var(--paper));
+  color: rgb(var(--ink));
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgb(var(--accent));
+  color: rgb(var(--paper));
+}
+
+/* Newsprint grain, laid over everything at very low contrast. */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ------------------------------------------------------------------ */
+/* Typesetting utilities                                               */
+/* ------------------------------------------------------------------ */
+
+/* Small-caps department labels: THE WIRE, MARKETS, CLASSIFIEDS… */
+.dept {
+  font-family: var(--font-mono);
+  font-size: 0.675rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* Classic double rule used to open a section, like a broadsheet fold. */
+.double-rule {
+  border-top: 3.5px double rgb(var(--ink));
+  border-bottom: 1px solid rgb(var(--ink));
+  height: 7px;
+}
+.double-rule-flip {
+  border-top: 1px solid rgb(var(--ink));
+  border-bottom: 3.5px double rgb(var(--ink));
+  height: 7px;
+}
+
+/* Drop cap for article ledes. */
+.dropcap::first-letter {
+  font-family: var(--font-display);
+  font-weight: 700;
+  float: left;
+  font-size: 3.4em;
+  line-height: 0.82;
+  padding-right: 0.09em;
+  padding-top: 0.05em;
+}
+
+/* Press-photo treatment: grayscale + a fine halftone screen on top,   */
+/* so screenshots read as printed photographs, not embeds.             */
+.press-photo {
+  position: relative;
+  overflow: hidden;
+}
+.press-photo img {
+  filter: grayscale(1) contrast(1.08) brightness(1.02) sepia(0.14);
+  display: block;
+  width: 100%;
+}
+.press-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgb(var(--paper) / 0.6) 0.5px, transparent 0.6px);
+  background-size: 3px 3px;
+  mix-blend-mode: soft-light;
+}
+
+/* Editor's proof mark: a hand-inked underline that draws on hover.    */
+.proof {
+  background-image: linear-gradient(rgb(var(--accent)), rgb(var(--accent)));
+  background-repeat: no-repeat;
+  background-position: 0 96%;
+  background-size: 0% 2px;
+  transition: background-size 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+a:hover .proof,
+a:focus-visible .proof,
+.proof:hover {
+  background-size: 100% 2px;
+}
+
+/* Justified article text with old-style hyphenation. */
+.copy {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  text-justify: inter-word;
+}
+
+/* One continuous rule down the middle of a two-column spread. A border on
+   each card would break at every row and sit off-centre in the gutter; this
+   is a single line, painted the full height of the section. */
+@media (min-width: 768px) {
+  .gutter-rule {
+    background-image: linear-gradient(rgb(var(--rule) / 0.6), rgb(var(--rule) / 0.6));
+    background-size: 1px 100%;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+  }
+}
+
+/* Ticker track animation. */
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.ticker-track {
+  animation: ticker 48s linear infinite;
+}
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+}
+
+/* Focus states in the paper's own voice. */
+:focus-visible {
+  outline: 2px solid rgb(var(--accent));
+  outline-offset: 3px;
+}
